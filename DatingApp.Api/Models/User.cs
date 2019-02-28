@@ -9,6 +9,14 @@ namespace DatingApp.Api.Models
         public byte[] PasswordHash { get; set; }
 
         public byte[] PasswordSalt { get; set; }
-        
+
+        public static User CreateNewUser(string username)
+        {
+            return new User
+            {
+                Username = username
+            };
+        }
+
     }
 }

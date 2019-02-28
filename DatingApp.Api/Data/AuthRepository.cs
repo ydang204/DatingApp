@@ -49,10 +49,11 @@ namespace DatingApp.Api.Data
             return true;
         }
 
-        public async Task<User> Register(User user, string password)
+        public async Task<User> RegisterAsync(User user, string password)
         {
             byte[] passwordHash, passwordSalt;
             _createPassword(password, out passwordHash, out passwordSalt);
+            user.Username = user.Username.ToLower();
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             await _context.Users.AddAsync(user);
@@ -73,7 +74,7 @@ namespace DatingApp.Api.Data
 
         public async Task<bool> UserExists(string username)
         {
-            if (await _context.Users.AnyAsync(x => x.Username == username))
+            if (await _context.Users.AnyAsync(x => x.Username == username.ToLower()))
             {
                 return true;
             }
