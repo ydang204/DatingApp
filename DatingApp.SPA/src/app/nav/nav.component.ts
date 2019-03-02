@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
   user: any = {};
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private alertify: AlertifyService
   ) { }
 
