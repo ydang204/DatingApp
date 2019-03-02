@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,20 +15,29 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { ListMembersComponent } from './list-members/list-members.component';
+import { LikedMembersComponent } from './liked-members/liked-members.component';
+import { MessagesComponent } from './messages/messages.component';
+import { appRoutes } from './routes';
+
 @NgModule({
    declarations: [
       AppComponent,
       ValueComponent,
       NavComponent,
       HomeComponent,
-      RegisterComponent
+      RegisterComponent,
+      ListMembersComponent,
+      LikedMembersComponent,
+      MessagesComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
-      BsDropdownModule.forRoot()
+      BsDropdownModule.forRoot(),
+      RouterModule.forRoot(appRoutes),
    ],
    providers: [
       AuthService,
