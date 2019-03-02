@@ -10,7 +10,8 @@ export class AlertifyService {
   constructor() { }
 
   confirm(message: string, okCallback: () => any) {
-    alertify.confirm(message, function (e) {
+    // Use arrow function instead
+    alertify.confirm(message, (e) => {
       if (e) {
         okCallback();
       } else {
