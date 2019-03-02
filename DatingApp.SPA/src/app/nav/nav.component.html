@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container">
     <a class="navbar-brand" href="#">Dating App</a>
     <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
@@ -30,7 +30,7 @@
         #username="ngModel" [(ngModel)]="user.username">
       <input class="form-control mr-sm-2" type="password" placeholder="Password" required name="password"
         #password="ngModel" [(ngModel)]="user.password">
-      <button class="btn btn-success my-2 my-sm-0" [disabled]="!loginForm.valid">Login</button>
+      <button class="btn btn-info my-2 my-sm-0" [disabled]="!loginForm.valid">Login</button>
     </form>
   </div>
 </nav>
