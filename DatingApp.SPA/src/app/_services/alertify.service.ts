@@ -11,7 +11,7 @@ export class AlertifyService {
 
   confirm(message: string, okCallback: () => any) {
     // Use arrow function instead
-    alertify.confirm(message, (e) => {
+    alertify.confirm(message, (e: any) => {
       if (e) {
         okCallback();
       } else {
