@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DatingApp.Api.Migrations
 {
-    public partial class ExtendedUserClass : Migration
+    public partial class ExtendedUserEntity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,7 @@ namespace DatingApp.Api.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "KnowAs",
+                name: "KnownAs",
                 table: "Users",
                 nullable: true);
 
@@ -110,7 +110,7 @@ namespace DatingApp.Api.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "KnowAs",
+                name: "KnownAs",
                 table: "Users");
 
             migrationBuilder.DropColumn(

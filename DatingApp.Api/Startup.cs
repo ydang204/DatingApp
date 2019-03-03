@@ -57,10 +57,11 @@ namespace DatingApp.Api
 
             // Register services
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddTransient<Seed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -87,6 +88,7 @@ namespace DatingApp.Api
             }
 
             // app.UseHttpsRedirection();
+            seeder.SeedData();
             app.UseAuthentication();
             app.UseCors(x => x.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
             app.UseMvc();
