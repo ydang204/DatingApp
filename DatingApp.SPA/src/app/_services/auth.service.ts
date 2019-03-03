@@ -22,7 +22,6 @@ export class AuthService {
         if (response) {
           localStorage.setItem('token', response.token);
           this.decodedToken = this.jwtHelper.decodeToken(response.token);
-          console.log(this.decodedToken);
         }
       }));
   }

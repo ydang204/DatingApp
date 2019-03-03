@@ -9,7 +9,7 @@ const httpOptions = {
   headers: new HttpHeaders({
     Authorization: 'Bearer ' + localStorage.getItem('token')
   })
-};
+}
 
 @Injectable({
   providedIn: 'root'
