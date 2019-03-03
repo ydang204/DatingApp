@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.Api.Data;
 using DatingApp.Api.Helpers;
 using DatingApp.Api.Shared;
@@ -54,10 +55,12 @@ namespace DatingApp.Api
                             ValidateAudience = false
                         };
                     });
-
+            // Add AutoMapper
+            services.AddAutoMapper();
             // Register services
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddTransient<Seed>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -48,6 +48,8 @@ namespace DatingApp.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("City");
+
                     b.Property<string>("Country");
 
                     b.Property<DateTime>("Created");
@@ -63,6 +65,8 @@ namespace DatingApp.Api.Migrations
                     b.Property<string>("KnownAs");
 
                     b.Property<DateTime>("LastActive");
+
+                    b.Property<string>("LookingFor");
 
                     b.Property<byte[]>("PasswordHash");
 

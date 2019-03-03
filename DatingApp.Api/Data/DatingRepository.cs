@@ -24,17 +24,17 @@ namespace DatingApp.Api.Data
             _context.Remove(entity);
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<User> GetUserAsync(int id)
         {
             return await _context.Users.Include(u => u.Photos).FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
             return await _context.Users.Include(u => u.Photos).ToListAsync();
         }
 
-        public async Task<bool> SaveChanges()
+        public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;
         }

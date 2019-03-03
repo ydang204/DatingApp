@@ -9,6 +9,11 @@ namespace DatingApp.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
+                name: "City",
+                table: "Users",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
                 name: "Country",
                 table: "Users",
                 nullable: true);
@@ -50,6 +55,11 @@ namespace DatingApp.Api.Migrations
                 table: "Users",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+            migrationBuilder.AddColumn<string>(
+                name: "LookingFor",
+                table: "Users",
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Photos",
@@ -86,6 +96,10 @@ namespace DatingApp.Api.Migrations
                 name: "Photos");
 
             migrationBuilder.DropColumn(
+                name: "City",
+                table: "Users");
+
+            migrationBuilder.DropColumn(
                 name: "Country",
                 table: "Users");
 
@@ -115,6 +129,10 @@ namespace DatingApp.Api.Migrations
 
             migrationBuilder.DropColumn(
                 name: "LastActive",
+                table: "Users");
+
+            migrationBuilder.DropColumn(
+                name: "LookingFor",
                 table: "Users");
         }
     }

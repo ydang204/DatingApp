@@ -8,9 +8,9 @@ namespace DatingApp.Api.Data
     {
         void Add<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
-        Task<IEnumerable<User>> GetUsers();
-        Task<User> GetUser(int id);
-        Task<bool> SaveChanges();
+        Task<IEnumerable<User>> GetUsersAsync();
+        Task<User> GetUserAsync(int id);
+        Task<bool> SaveChangesAsync();
 
     }
 }
