@@ -7,6 +7,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { MemberDetailResolver } from './_resolver/member-detail.resolver';
 import { MemberListResolver } from './_resolver/member-list.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolver/member-edit.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -16,6 +18,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'members', component: ListMembersComponent, resolve: { users: MemberListResolver } },
+            { path: 'members/edit', component: MemberEditComponent, resolve: { user: MemberEditResolver } },
             { path: 'members/:id', component: MemberDetailsComponent, resolve: { user: MemberDetailResolver } },
             { path: 'messages', component: MessagesComponent },
             { path: 'lists', component: LikedMembersComponent },
