@@ -64,6 +64,8 @@ namespace DatingApp.Api
                             ValidateAudience = false
                         };
                     });
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             // Add AutoMapper
             services.AddAutoMapper();
             // Register services
