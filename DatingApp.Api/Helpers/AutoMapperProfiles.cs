@@ -18,6 +18,7 @@ namespace DatingApp.Api.Helpers
             .ForMember(d => d.PhotoUrl, opt => opt.MapFrom(s => s.Photos.FirstOrDefault(p => p.IsMain).Url));
             CreateMap<Photo, PhotoDetailsDto>();
             CreateMap<UserUpdateDto, User>();
+            CreateMap<Photo, PhotoReturnDto>();
         }
     }
 }
