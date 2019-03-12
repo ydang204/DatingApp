@@ -13,6 +13,7 @@ export class AuthService {
   private baseUrl = environment.apiUrl + 'auth/';
   private jwtHelper = new JwtHelperService();
   decodedToken: any;
+  token: any;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -31,8 +32,8 @@ export class AuthService {
   }
 
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
+    this.token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(this.token);
   }
 
 
