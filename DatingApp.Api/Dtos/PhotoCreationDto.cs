@@ -5,7 +5,6 @@ namespace DatingApp.Api.Dtos
 {
     public class PhotoCreationDto
     {
-        public int UserId { get; set; }
 
         public string Url { get; set; }
 

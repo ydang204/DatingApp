@@ -58,10 +58,10 @@ namespace DatingApp.Api.Controllers
 
         [HttpPost]
         [Route(nameof(UploadPhoto))]
-        public async Task<IActionResult> UploadPhoto([FromForm]PhotoCreationDto photoCreationDto)
+        public async Task<IActionResult> UploadPhoto(int userId, [FromForm]PhotoCreationDto photoCreationDto)
         {
             var identityUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            if (photoCreationDto.UserId != identityUser)
+            if (userId != identityUser)
             {
                 return Unauthorized();
             }
