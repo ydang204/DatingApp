@@ -44,8 +44,7 @@ namespace DatingApp.Api.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        [Route(nameof(GetPhoto))]
+        [HttpGet("{id}", Name = nameof(GetPhoto))]
         public async Task<IActionResult> GetPhoto(int id)
         {
             var photoFromRepo = await _datingRepository.GetPhotoAsync(id);
@@ -59,7 +58,7 @@ namespace DatingApp.Api.Controllers
 
         [HttpPost]
         [Route(nameof(UploadPhoto))]
-        public async Task<IActionResult> UploadPhoto(PhotoCreationDto photoCreationDto)
+        public async Task<IActionResult> UploadPhoto([FromForm]PhotoCreationDto photoCreationDto)
         {
             var identityUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (photoCreationDto.UserId != identityUser)
@@ -98,7 +97,7 @@ namespace DatingApp.Api.Controllers
             if (await _datingRepository.SaveChangesAsync())
             {
                 var photoToReturn = _mapper.Map<PhotoReturnDto>(photo);
-                return CreatedAtRoute(nameof(GetPhoto), new { id = photo.Id }, photoToReturn);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");
