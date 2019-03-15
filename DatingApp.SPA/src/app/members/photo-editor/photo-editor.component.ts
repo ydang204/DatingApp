@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./photo-editor.component.css']
 })
 export class PhotoEditorComponent implements OnInit {
-  @Input() photos: Photo;
+  @Input() photos: Photo[];
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
@@ -19,7 +19,7 @@ export class PhotoEditorComponent implements OnInit {
 
   constructor(
     private authService: AuthService) {
-    this.uploadUrl = this.baseUrl + 'users/' + this.authService.decodedToken.nameid + '/photos';
+    this.uploadUrl = this.baseUrl + 'users/' + this.authService.decodedToken.nameid + '/photos/uploadphoto';
   }
 
   ngOnInit() {
@@ -33,12 +33,28 @@ export class PhotoEditorComponent implements OnInit {
   initializeUploader() {
     this.uploader = new FileUploader({
       url: this.uploadUrl,
-      authToken: this.authService.token,
+      authToken: 'Bearer ' + this.authService.token,
       isHTML5: true,
       allowedFileType: ['image'],
       removeAfterUpload: true,
       autoUpload: false,
       maxFileSize: 10 * 1024 * 1024
     });
+
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      const res: Photo = JSON.parse(response);
+      const photo = {
+        id: res.id,
+        url: res.url,
+        dateAdded: res.dateAdded,
+        description: res.description,
+        isMain: res.isMain
+      };
+      this.photos.push(photo);
+    };
   }
 }

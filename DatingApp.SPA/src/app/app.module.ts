@@ -66,6 +66,8 @@ export function tokenGetter() {
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       JwtModule.forRoot({
+         // Use this config to globally add jwt to request
+         // https://github.com/auth0/angular2-jwt#usage-injection
          config: {
             tokenGetter,
             whitelistedDomains: ['localhost:5000'],
