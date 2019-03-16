@@ -11,7 +11,9 @@ namespace DatingApp.Api.Data
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserAsync(int id);
         Task<bool> SaveChangesAsync();
-
         Task<Photo> GetPhotoAsync(int id);
+
+        // Get the main photo of user
+        Task<Photo> GetMainPhotoAsync(int userId);
     }
 }
