@@ -25,4 +25,8 @@ export class UserService {
   updateUser(user: User) {
     return this.httpClient.put(this.baseUrl + 'updateuser', user);
   }
+
+  setMainPhoto(userId: number, id: number) {
+    return this.httpClient.post(this.baseUrl + userId + '/photos/' + id + '/setmainphoto', {});
+  }
 }
