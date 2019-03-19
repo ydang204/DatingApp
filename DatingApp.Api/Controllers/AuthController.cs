@@ -1,11 +1,13 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.Api.Data;
 using DatingApp.Api.Dtos;
+using DatingApp.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -39,10 +41,12 @@ namespace DatingApp.Api.Controllers
                 return BadRequest("Username already exists");
             }
 
-            var userToCreate = Models.User.CreateNewUser(model.Username);
+            var userToCreate = _mapper.Map<User>(model);
             var createdUser = await _authRepository.RegisterAsync(userToCreate, model.Password);
 
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserDetailsDto>(createdUser);
+
+            return CreatedAtRoute("GetUser", new { controller = "Users", id = createdUser.Id }, userToReturn);
         }
 
 

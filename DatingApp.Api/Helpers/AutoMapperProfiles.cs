@@ -9,15 +9,18 @@ namespace DatingApp.Api.Helpers
     {
         public AutoMapperProfiles()
         {
+            // User Mappings
             CreateMap<User, UserListDto>()
             .ForMember(d => d.Age, opt => opt.MapFrom(s => s.DateOfBirth.CalulateAge()))
             .ForMember(d => d.PhotoUrl, opt => opt.MapFrom(s => s.Photos.FirstOrDefault(p => p.IsMain).Url));
-
             CreateMap<User, UserDetailsDto>()
             .ForMember(d => d.Age, opt => opt.MapFrom(s => s.DateOfBirth.CalulateAge()))
             .ForMember(d => d.PhotoUrl, opt => opt.MapFrom(s => s.Photos.FirstOrDefault(p => p.IsMain).Url));
-            CreateMap<Photo, PhotoDetailsDto>();
             CreateMap<UserUpdateDto, User>();
+            CreateMap<UserRegisterDto, User>();
+
+            // Photo Mappings
+            CreateMap<Photo, PhotoDetailsDto>();
             CreateMap<Photo, PhotoReturnDto>();
             CreateMap<PhotoCreationDto, Photo>();
         }

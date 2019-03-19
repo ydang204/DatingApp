@@ -34,8 +34,8 @@ export class AuthService {
       }));
   }
 
-  register(model: any) {
-    return this.httpClient.post(this.baseUrl + 'register', model);
+  register(user: User) {
+    return this.httpClient.post(this.baseUrl + 'register', user);
   }
 
   loggedIn() {
@@ -43,7 +43,7 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(this.token);
   }
 
-  changeMemberPhoto(photoUrl: string){
+  changeMemberPhoto(photoUrl: string) {
     this.photoUrl.next(photoUrl);
   }
 
