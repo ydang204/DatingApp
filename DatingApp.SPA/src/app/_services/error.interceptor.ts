@@ -27,7 +27,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                         for (const key in serverError) {
                             if (serverError.hasOwnProperty(key)) {
                                 modalStateErrors += serverError[key] + '\n';
-
                             }
                         }
                     }
