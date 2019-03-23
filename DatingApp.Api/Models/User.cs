@@ -35,6 +35,10 @@ namespace DatingApp.Api.Models
 
         public ICollection<Photo> Photos { get; set; }
 
+        public ICollection<Like> Likers { get; set; }
+
+        public ICollection<Like> Likees { get; set; }
+
         public static User CreateNewUser(string username)
         {
             return new User
@@ -43,9 +47,6 @@ namespace DatingApp.Api.Models
             };
         }
 
-        public static User NormalizeUser()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
