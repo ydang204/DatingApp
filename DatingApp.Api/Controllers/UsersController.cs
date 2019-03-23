@@ -31,6 +31,15 @@ namespace DatingApp.Api.Controllers
         [Route(nameof(GetUsers))]
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
+            // get current user's id and gender
+            var identityUser = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userFromRepo = await _datingRepository.GetUserAsync(identityUser);
+            userParams.UserId = identityUser;
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
+            }
+
             var users = await _datingRepository.GetUsersAsync(userParams);
             var usersToReturn = _mapper.Map<IEnumerable<UserListDto>>(users);
 
@@ -52,7 +61,7 @@ namespace DatingApp.Api.Controllers
         [Route(nameof(UpdateUser))]
         public async Task<IActionResult> UpdateUser(UserUpdateDto updateUser)
         {
-            var identityUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var identityUser = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             if (updateUser.Id != identityUser)
             {
                 return Unauthorized();
