@@ -37,6 +37,7 @@ export class ListMembersComponent implements OnInit {
     this.userParams.gender = this.user.gender === 'male' ? 'female' : 'male';
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
+    this.userParams.orderBy = 'lastActive';
     if (reloadUser) {
       this.loadUsers();
     }
