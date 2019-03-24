@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = environment.apiUrl + 'users/';
+  private baseUrl = `${environment.apiUrl}users/`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -34,7 +34,7 @@ export class UserService {
       params = params.append('orderBy', userParams.orderBy);
     }
 
-    return this.httpClient.get<User[]>(this.baseUrl + 'getusers', { observe: 'response', params })
+    return this.httpClient.get<User[]>(`${this.baseUrl}getusers`, { observe: 'response', params })
       .pipe(map(response => {
         paginatedResult.result = response.body;
         if (response.headers.get('pagination') != null) {
@@ -49,15 +49,15 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    return this.httpClient.put(this.baseUrl + 'updateuser', user);
+    return this.httpClient.put(`${this.baseUrl}updateuser`, user);
   }
 
   setMainPhoto(userId: number, id: number) {
-    return this.httpClient.post(this.baseUrl + userId + '/photos/' + id + '/setmainphoto', {});
+    return this.httpClient.post(`${this.baseUrl}${userId}/photos/${id}/setmainphoto`, {});
   }
 
   deletePhoto(userId: number, id: number) {
-    return this.httpClient.delete(this.baseUrl + userId + '/photos/' + id + '/delete');
+    return this.httpClient.delete(`${this.baseUrl}${userId}/photos/${id}/delete`);
   }
 
   sendLike(userId: number, recipientId: number) {
