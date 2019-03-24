@@ -19,7 +19,6 @@ import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 import { ListMembersComponent } from './members/list-members/list-members.component';
-import { LikedMembersComponent } from './liked-members/liked-members.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
@@ -32,6 +31,8 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolver/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { ListsComponent } from './lists/lists.component';
+import { ListsResolver } from './_resolver/lists-resolver';
 
 
 
@@ -48,8 +49,8 @@ export function tokenGetter() {
       NavComponent,
       HomeComponent,
       RegisterComponent,
+      ListsComponent,
       ListMembersComponent,
-      LikedMembersComponent,
       MessagesComponent,
       MemberCardComponent,
       MemberDetailsComponent,
@@ -90,7 +91,8 @@ export function tokenGetter() {
       UserService,
       MemberDetailResolver,
       MemberListResolver,
-      MemberEditResolver
+      MemberEditResolver,
+      ListsResolver
    ],
    bootstrap: [
       AppComponent
