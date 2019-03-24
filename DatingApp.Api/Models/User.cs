@@ -37,16 +37,9 @@ namespace DatingApp.Api.Models
 
         public ICollection<Like> Likers { get; set; }
 
-        public ICollection<Like> Likees { get; set; }
-
-        public static User CreateNewUser(string username)
-        {
-            return new User
-            {
-                Username = username
-            };
-        }
-
+        public ICollection<Like> Likees { get; set; }  
+        public ICollection<Message> MessageSent { get; set; }  
+        public ICollection<Message> MessageReceived { get; set; }  
         
     }
 }
