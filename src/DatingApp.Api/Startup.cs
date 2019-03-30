@@ -49,8 +49,8 @@ namespace DatingApp.Api
             services.AddSwaggerDocument(document =>
             {
                 // Add an authenticate button to Swagger for JWT tokens
-                document.OperationProcessors.Add(new OperationSecurityScopeProcessor("JWT"));
-                document.DocumentProcessors.Add(new SecurityDefinitionAppender("JWT", new SwaggerSecurityScheme
+                document.OperationProcessors.Add(new OperationSecurityScopeProcessor("JWT token"));
+                document.DocumentProcessors.Add(new SecurityDefinitionAppender("JWT token", new SwaggerSecurityScheme
                 {
                     Type = SwaggerSecuritySchemeType.ApiKey,
                     Name = "Authorization",
@@ -110,8 +110,8 @@ namespace DatingApp.Api
             }
 
             // Add OpenAPI/Swagger middlewares
-            app.UseSwagger(); // Serves the registered OpenAPI/Swagger documents by default on `/swagger/{documentName}/swagger.json`
             app.UseSwaggerUi3(); // Serves the Swagger UI 3 web ui to view the OpenAPI/Swagger documents by default on `/swagger`
+            app.UseSwagger(); // Serves the registered OpenAPI/Swagger documents by default on `/swagger/{documentName}/swagger.json`
 
 
             // app.UseHttpsRedirection();

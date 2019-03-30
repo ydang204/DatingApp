@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.Api.Helpers;
 using DatingApp.Api.Models;
+using DatingApp.Api.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.Api.Data
@@ -119,9 +120,30 @@ namespace DatingApp.Api.Data
             return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
         }
 
-        public Task<PagedList<Message>> GetMessages()
+        public async Task<PagedList<Message>> GetMessages(MessageParams messageParams)
         {
-            throw new NotImplementedException();
+            var messages = _context.Messages.Include(m => m.Sender)
+                                        .ThenInclude(m => m.Photos)
+                                        .Include(m => m.Recipient)
+                                        .ThenInclude(m => m.Photos)
+                                        .AsQueryable();
+
+            switch (messageParams.MessageContainer)
+            {
+                case Constants.InboxMessages:
+                    messages = messages.Where(m => m.RecipientId == messageParams.UserId);
+                    break;
+                case Constants.OutboxMessages:
+                    messages = messages.Where(m => m.SenderId == messageParams.UserId);
+                    break;
+                default:
+                    messages = messages.Where(m => m.RecipientId == messageParams.UserId && !m.IsRead);
+                    break;
+            }
+
+            messages = messages.OrderByDescending(m => m.MessageSent);
+
+            return await PagedList<Message>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
         }
 
         public Task<IEnumerable<Message>> GetMessagesThread(int userId, int recipientId)

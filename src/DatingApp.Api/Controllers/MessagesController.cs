@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -14,7 +15,7 @@ namespace DatingApp.Api.Controllers
     [ApiController]
     [Authorize]
     [ServiceFilter(typeof(LogUserActivity))]
-    [Route("api/users/{userId}[controller]")]
+    [Route("api/users/{userId}/[controller]")]
     public class MessagesController : ControllerBase
     {
         private readonly IDatingRepository _repo;
@@ -44,6 +45,24 @@ namespace DatingApp.Api.Controllers
             return Ok(messageFromRepo);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetMessagesForUser(int userId, [FromQuery] MessageParams messageParams)
+        {
+            if (userId != int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            {
+                return Unauthorized();
+            }
+
+            messageParams.UserId = userId;
+
+            var messageFromRepo = await _repo.GetMessages(messageParams);
+            var messages = _mapper.Map<IEnumerable<MessageReturnDto>>(messageFromRepo);
+
+            Response.AddPagination(messageFromRepo.CurrentPage, messageFromRepo.PageSize, messageFromRepo.TotalCount, messageFromRepo.TotalPages);
+
+            return Ok(messages);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, MessageCreateDto messageToCreate)
@@ -65,7 +84,7 @@ namespace DatingApp.Api.Controllers
 
             if (await _repo.SaveChangesAsync())
             {
-                return CreatedAtRoute(nameof(GetMessage), new { id = message.Id }, message);
+                return CreatedAtRoute(nameof(GetMessage), new { id = message.Id }, messageToCreate);
             }
 
             throw new Exception("Creating message failed on save");
