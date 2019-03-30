@@ -21,7 +21,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Swagger;
+using NSwag;
+using NSwag.SwaggerGeneration.Processors.Security;
 
 namespace DatingApp.Api
 {
@@ -44,13 +45,19 @@ namespace DatingApp.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
 
-
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
+            // Add OpenAPI/Swagger document
+            services.AddSwaggerDocument(document =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Dating Api", Version = "v1" });
+                // Add an authenticate button to Swagger for JWT tokens
+                document.OperationProcessors.Add(new OperationSecurityScopeProcessor("JWT"));
+                document.DocumentProcessors.Add(new SecurityDefinitionAppender("JWT", new SwaggerSecurityScheme
+                {
+                    Type = SwaggerSecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    In = SwaggerSecurityApiKeyLocation.Header,
+                    Description = "Type into the textbox: Bearer {your JWT token}."
+                }));
             });
-
 
             // Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -102,15 +109,10 @@ namespace DatingApp.Api
                 // app.UseHsts();
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
+            // Add OpenAPI/Swagger middlewares
+            app.UseSwagger(); // Serves the registered OpenAPI/Swagger documents by default on `/swagger/{documentName}/swagger.json`
+            app.UseSwaggerUi3(); // Serves the Swagger UI 3 web ui to view the OpenAPI/Swagger documents by default on `/swagger`
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
 
             // app.UseHttpsRedirection();
             seeder.SeedData();
