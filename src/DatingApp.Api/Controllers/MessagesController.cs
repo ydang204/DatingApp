@@ -53,7 +53,7 @@ namespace DatingApp.Api.Controllers
                 return Unauthorized();
             }
 
-            messageParams.UserId = userId;
+            messageParams.CurrentUserId = userId;
 
             var messageFromRepo = await _repo.GetMessages(messageParams);
             var messages = _mapper.Map<IEnumerable<MessageReturnDto>>(messageFromRepo);

@@ -131,13 +131,13 @@ namespace DatingApp.Api.Data
             switch (messageParams.MessageContainer)
             {
                 case Constants.InboxMessages:
-                    messages = messages.Where(m => m.RecipientId == messageParams.UserId);
+                    messages = messages.Where(m => m.RecipientId == messageParams.CurrentUserId);
                     break;
                 case Constants.OutboxMessages:
-                    messages = messages.Where(m => m.SenderId == messageParams.UserId);
+                    messages = messages.Where(m => m.SenderId == messageParams.CurrentUserId);
                     break;
                 default:
-                    messages = messages.Where(m => m.RecipientId == messageParams.UserId && !m.IsRead);
+                    messages = messages.Where(m => m.RecipientId == messageParams.CurrentUserId && !m.IsRead);
                     break;
             }
 
