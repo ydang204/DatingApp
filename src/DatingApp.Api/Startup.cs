@@ -116,9 +116,16 @@ namespace DatingApp.Api
 
             // app.UseHttpsRedirection();
             seeder.SeedData();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseCors(x => x.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
-            app.UseMvc();
+            app.UseMvc(routes=>{
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new {controller =  "FallBack", action = "Index"}
+                    );
+            });
         }
     }
 }
