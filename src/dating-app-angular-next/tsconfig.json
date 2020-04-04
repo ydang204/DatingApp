@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -13,12 +13,12 @@
     "target": "es2015",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@components/*": ["_components/*"],
-      "@constants/*": ["_constants/*"],
-      "@guards/*": ["_guards/*"],
-      "@models/*": ["_models/*"],
-      "@resolvers/*": ["_resolvers/*"],
-      "@services/*": ["_services/*"]
+      "@components/*": ["src/_components/*"],
+      "@constants/*": ["src/_constants/*"],
+      "@guards/*": ["src/_guards/*"],
+      "@models/*": ["src/_models/*"],
+      "@resolvers/*": ["src/_resolvers/*"],
+      "@services/*": ["src/_services/*"]
     }
   },
   "angularCompilerOptions": {
