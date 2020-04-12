@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from '@components/layout/layout.module';
 import { SharedModule } from '@components/shared/shared.module';
+import { RegisterComponent } from '@components/auth/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,RegisterComponent],
   imports: [BrowserModule, AppRoutingModule, LayoutModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
