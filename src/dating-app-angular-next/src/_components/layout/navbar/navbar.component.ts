@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   constructor() {}
-
+  register = false;
   ngOnInit() {}
+
+
 }
