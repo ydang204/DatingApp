@@ -1,0 +1,34 @@
+.dropdown-toggle,
+.dropdown-item {
+  cursor: pointer;
+}
+
+.navbar {
+  background-color: #4c4ee4;
+}
+
+.form-inline {
+  .btn {
+    background-color: #0d81c5;
+  }
+}
+.nofity{
+  margin-right: 10px;
+  fa-layers {
+    fa-icon {
+      color: #fbf8f8;
+      font-size: 28px;
+    }
+    fa-layers-counter{
+      font-size: 2.7rem;
+    }
+  }
+}
+
+
+img {
+  max-height: 50px;
+  border: 2px solid white;
+  display: inline;
+  border-radius: 50%;
+}
