@@ -8,13 +8,37 @@ import { HomeComponent } from '@components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertifyService } from '@services/alertify.service';
-import { LayoutModule } from '@components/layout/layout.module';
+import { CommonModule } from '@angular/common';
+import { BsDropdownModule} from 'ngx-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { SharedModule } from '@components/shared/shared.module';
+import { LayoutModule } from '@components/layout/layout.module';
 import { RegisterComponent } from '@components/auth/register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from '../_components/layout/navbar/navbar.component';
+import { FooterComponent } from '../_components/layout/footer/footer.component';
+import { ForgotPasswordComponent } from '../_components/auth/forgot-password/forgot-password.component';
 
 @NgModule({
-  declarations: [AppComponent,RegisterComponent,HomeComponent],
-  imports: [BrowserModule, HttpClientModule, BrowserAnimationsModule, AppRoutingModule, BsDatepickerModule.forRoot(), LayoutModule, SharedModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    FontAwesomeModule,
+    BrowserModule, 
+    HttpClientModule, 
+    BrowserAnimationsModule, 
+    AppRoutingModule, 
+    BsDatepickerModule.forRoot(), 
+    LayoutModule, 
+    SharedModule
+  ],
+  declarations: [AppComponent , NavbarComponent , FooterComponent , ForgotPasswordComponent],
+  exports: [],
   providers: [AlertifyService, AuthService],
   bootstrap: [AppComponent],
 })
